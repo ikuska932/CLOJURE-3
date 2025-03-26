@@ -1,0 +1,35 @@
+(ns my-app.core
+  (:require [clojure.test :refer :all]))
+
+;; 1. 
+(defn factorial [n]
+  (if (zero? n) 1
+      (* n (factorial (dec n)))))
+
+;; 2. 
+(defn string-length [s]
+  (count s))
+
+;; 3.
+(use-fixtures :each
+  (fn [f]
+    (println "Setting up test environment...")
+    (f)
+    (println "Tearing down test environment...")))
+
+;; 4. 
+(deftest test-factorial
+  (is (= 1 (factorial 0)))
+  (is (= 1 (factorial 1)))
+  (is (= 2 (factorial 2)))
+  (is (= 6 (factorial 3)))
+  (is (= 24 (factorial 4))))
+
+;; 5. 
+(deftest test-string-length
+  (is (= 5 (string-length "Hello")))
+  (is (= 0 (string-length "")))
+  (is (= 3 (string-length "abc"))))
+
+;; 
+(run-tests)
