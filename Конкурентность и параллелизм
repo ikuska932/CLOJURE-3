@@ -1,0 +1,36 @@
+(ns concurrency-examples)
+
+;; 1. 
+(def numbers (atom []))
+
+(defn add-number [n]
+  (swap! numbers conj n))
+
+;; === Тест атома ===
+(add-number 10)
+(add-number 20)
+(add-number 30)
+(println "Numbers in atom:" @numbers) ;; => [10 20 30]
+
+;; 2. 
+(def my-agent (agent 0))
+
+(defn async-update [x]
+  (Thread/sleep 500) 
+  (+ x 10))
+
+(send my-agent async-update)
+
+
+(Thread/sleep 1000)
+(println "Agent value:" @my-agent) ;; => 10
+
+;; 3. 
+(def numbers-list (range 1 1001)) 
+
+(defn square [x]
+  (* x x))
+
+(def sum-of-squares (reduce + (pmap square numbers-list)))
+
+(println "Sum of squares:" sum-of-squares) 
