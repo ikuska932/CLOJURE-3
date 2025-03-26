@@ -1,0 +1,21 @@
+(ns strings
+  (:require [clojure.string :as str]))
+
+
+(defn to-uppercase [s]
+  (str/upper-case s))
+
+
+(defn trim-string [s]
+  (str/trim s))
+
+
+(defn- private-helper [s]
+  (str "PRIVATE: " s))
+
+
+(ns my-app.core
+  (:require [strings :as str-utils]))
+
+(println (str-utils/to-uppercase "hello world")) 
+(println (str-utils/trim-string "  Clojure  "))  
