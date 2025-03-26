@@ -1,0 +1,23 @@
+(ns java-integration-example
+  (:import [java.util ArrayList]
+           [java.io File]))
+
+(defn -main []
+  ;; 1
+  (let [my-list (ArrayList.)]
+    (.add my-list "Apple")
+    (.add my-list "Banana")
+    (.add my-list "Cherry")
+    (println "ArrayList elements:" my-list))
+
+  ;; 2
+  (let [os-name (System/getProperty "os.name")]
+    (println "Operating System:" os-name))
+
+  ;; 3
+  (let [file-path "test.txt"
+        file (File. file-path)]
+    (println "File exists?" (.exists file))))
+
+
+(-main)
