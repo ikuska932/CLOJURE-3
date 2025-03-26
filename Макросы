@@ -1,0 +1,33 @@
+(ns my-macros)
+
+;; 1. 
+(defmacro with-logging [& body]
+  `(do
+     (println "Starting execution...")
+     (let [result# (do ~@body)]
+       (println "Execution finished.")
+       result#)))
+
+;; 2. 
+(defmacro assert-equal [a b]
+  `(let [val1# ~a
+         val2# ~b]
+     (if (not= val1# val2#)
+       (throw (Exception. (str "Assertion failed: " val1# " is not equal to " val2#)))
+       (println "Assertion passed!"))))
+
+;; 3. 
+(defmacro defconstant [name value]
+  `(def ~name (do
+                (println "Defining constant:" '~name "with value" ~value)
+                ~value)))
+
+(with-logging
+  (Thread/sleep 500)
+  (println "Inside with-logging block"))
+
+(assert-equal (+ 2 2) 4)  
+;; (assert-equal 5 10)    
+
+(defconstant PI 3.14159)
+(println "PI:" PI)
