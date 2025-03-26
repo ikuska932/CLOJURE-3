@@ -1,0 +1,20 @@
+Завизимости:
+
+(defproject my-project "0.1.0-SNAPSHOT"
+  :description "A simple Clojure project"
+  :dependencies [[org.clojure/clojure "1.10.3"]]
+  :main my-project.core)
+
+Код:
+
+(ns my-project.core)
+
+(defn -main []
+  (println "Hello, World!"))
+
+
+(defn greet [name]
+  (str "Hello, " name "!"))
+
+(println (greet "Clojure"))
+
